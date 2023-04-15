@@ -10,7 +10,6 @@ class Solution {
         if (price >= 500000) {
             return price/100*80;
         }
-            
         return price;
     }
 }
