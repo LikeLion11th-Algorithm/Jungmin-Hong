@@ -1,14 +1,11 @@
 class Solution {
-    public int solution(int balls, int share) {
-        int a = factorial(balls);
-        int b = factorial(balls-share)*factorial(share);
-        return a/b;
-    }
-    
-    public int factorial(int num) {
-        if (num == 1) {
-            return 1;
+    public long solution(int balls, int share) {
+        long sum1 = 1;
+        long sum2 = 1;
+        for (int i=0; i<balls-share+1; i++) {
+            sum1 *= balls--;
+            sum2 *= share--;
         }
-        return num * factorial(num-1);
+        return sum1/sum2;
     }
 }
