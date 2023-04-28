@@ -1,5 +1,8 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] array, int n) {
+        Arrays.sort(array);
         int index = 0; 
         int gap = n;
         for (int i=0; i<array.length; i++) {
@@ -8,14 +11,12 @@ class Solution {
                     index = i;
                     gap = array[i]-n;
                 }
-                if (array[i]-n == gap && array[index] > array[i]) index = i;
             }
             else {
                 if (n-array[i] < gap) {
                     index = i; 
                     gap = n-array[i];
                 }
-                if (n-array[i] == gap && array[index] > array[i]) index = i;
             }   
         }
         int answer = array[index];
