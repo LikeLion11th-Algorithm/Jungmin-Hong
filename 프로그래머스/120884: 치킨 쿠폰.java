@@ -1,14 +1,12 @@
 class Solution {
     public int solution(int chicken) {
-        int answer = chicken/10;
-        int left = chicken%10 + answer%10 + answer/10;
-        System.out.println(left);
-        answer += answer/10;
+        int answer = 0;
         
-        while (left >= 10) {
-            answer += left/10;
-            left = left%10 + left/10;
+        while (chicken >= 10) {
+            answer += chicken/10;
+            chicken = chicken/10 + chicken%10;
         }
+
         return answer;
     }
 }
