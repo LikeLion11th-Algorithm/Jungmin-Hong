@@ -1,0 +1,18 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] num_list) {
+        int answer = 0;
+        int mul = 1;
+        int squared = 0;
+        
+        for (int i=0; i<num_list.length; i++) {
+            mul *= num_list[i];
+            squared += num_list[i];
+        }
+        
+        if (mul < Math.pow(squared,2)) answer = 1;
+        
+        return answer;
+    }
+}
