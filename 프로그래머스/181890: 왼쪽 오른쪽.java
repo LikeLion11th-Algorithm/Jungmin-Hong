@@ -1,32 +1,10 @@
+import java.util.*;
 class Solution {
     public String[] solution(String[] str_list) {
-        String answer = "";
         for (int i=0; i<str_list.length; i++) {
-            if (str_list[i].equals("l")) {
-                answer = getLeft(str_list, i);
-                break;
-            }
-            else if (str_list[i].equals("r")) {
-                answer = getRight(str_list, i);
-                break;
-            }
+            if (str_list[i].equals("l")) return Arrays.copyOfRange(str_list, 0, i);
+            else if (str_list[i].equals("r")) return Arrays.copyOfRange(str_list, i+1, str_list.length);
         }
-        return answer.equals("") ? new String[0] : answer.split("");
-    }
-    
-    public String getLeft(String[] str, int idx) {
-        String answer = "";
-        for (int i=0; i<idx; i++) {
-            answer += str[i];
-        }
-        return answer;
-    }
-    
-    public String getRight(String[] str, int idx) {
-        String answer = "";
-        for (int i=idx+1; i<str.length; i++) {
-            answer += str[i];
-        }
-        return answer;
+        return new String[0];
     }
 }
