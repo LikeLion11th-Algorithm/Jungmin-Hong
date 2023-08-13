@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public String solution(String X, String Y) {
-        String answer = "";
         
         // 0-9의 숫자 개수를 셀 int 배열
         int[] x = new int[10];
@@ -15,15 +14,18 @@ class Solution {
         for (int i=0; i<Y.length(); i++) {
             y[Character.getNumericValue(Y.charAt(i))]++;
         }
-        
-        // 맨 뒤에서부터 둘 중 작은 개수만큼 answer에 추가
+
+        StringBuilder sb = new StringBuilder();
         for (int i=9; i>=0; i--) {
             int min = Math.min(x[i], y[i]);
             for (int k=0; k<min; k++) {
-                answer += Integer.toString(i);
+                sb.append(i);
             }
         }
         
-        return answer.equals("") ? "-1":String.valueOf(Integer.parseInt(answer));
+        String answer = sb.toString();
+        answer = answer.replaceAll("0+", "0");
+        
+        return answer.equals("") ? "-1":answer;
     }
 }
