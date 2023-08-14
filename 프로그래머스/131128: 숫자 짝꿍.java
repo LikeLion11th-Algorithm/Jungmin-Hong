@@ -24,8 +24,9 @@ class Solution {
         }
         
         String answer = sb.toString();
-        answer = answer.replaceAll("0+", "0");
+        if (answer.equals("")) return "-1";
+        if (answer.equals("0".repeat(answer.length()))) return "0";
         
-        return answer.equals("") ? "-1":answer;
+        return answer;
     }
 }
