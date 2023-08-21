@@ -3,13 +3,27 @@ import java.util.*;
 class Solution {
     public String solution(String[] participant, String[] completion) {
         String answer = "";
-        
-        for (int i=0; i<participant.length; i++) {
-            int idx = Arrays.asList(completion).indexOf(participant[i]);
-            if (idx == -1) answer = participant[i];
-            else completion[idx] = "";
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        // participant 추가
+        for (String p : participant) {
+            map.put(p, map.getOrDefault(p, 0) + 1);
         }
+
+        // completion 제거
+        for (String c : completion) {
+            map.put(c, map.get(c) - 1);
+        }
+
         
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > 0) {
+                answer = entry.getKey();
+                break;
+            }
+        }
+
         return answer;
     }
 }
