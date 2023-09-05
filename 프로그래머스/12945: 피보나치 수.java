@@ -1,18 +1,13 @@
 import java.util.*;
 
 class Solution {
-    int[] fibo1;
     public int solution(int n) {
-        fibo1 = new int[n + 1];
-        Arrays.fill(fibo1, -1);
-        fibo1[0] = 0;
-        fibo1[1] = 1;
-        return fibo2(n)%1234567;
+        int[] fibo = new int[n + 1];
+        fibo[0] = 0;x
+        fibo[1] = 1;
+        for (int i=2; i<=n; i++) {
+            fibo[i] = (fibo[i-1]+fibo[i-2])%1234567;
+        }
+        return fibo[n];
     }
-    
-    public int fibo2(int n) {
-        if (fibo1[n]==-1) fibo1[n] = fibo2(n-1)+fibo2(n-2);
-        return fibo1[n];
-    }
-    
 }
