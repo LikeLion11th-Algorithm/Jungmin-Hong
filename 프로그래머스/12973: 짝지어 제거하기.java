@@ -1,13 +1,14 @@
+import java.util.Stack;
+
 class Solution {
-    public int solution(String s) {          
-        StringBuilder sb = new StringBuilder(s);
-        for (int i=0; i<sb.length()-1; i++) {
-            if (sb.charAt(i) == sb.charAt(i+1)) {
-                sb.delete(i, i+2);
-                i=-1;
-            }
+    public int solution(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : s.toCharArray()) {
+            if (!stack.isEmpty() && stack.peek()==c) stack.pop();
+            else stack.push(c);
         }
 
-        return sb.length()==0 ? 1:0;
+        return stack.isEmpty() ? 1:0;
     }
 }
