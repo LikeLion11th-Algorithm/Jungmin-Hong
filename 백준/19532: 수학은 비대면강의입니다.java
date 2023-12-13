@@ -6,11 +6,15 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         String[] str = br.readLine().split(" ");
         double[] nums = new double[6];
-        for (int i=0; i<6; i++) {
-            nums[i] = Double.parseDouble(str[i]);
-        }
-        int x = (int) ((nums[5]-((nums[4]*nums[2])/nums[1]))/(nums[3]-((nums[0]*nums[4])/nums[1])));
-        int y = (int) ((nums[2]-(nums[0]*x))/nums[1]);
+        double a = Double.parseDouble(str[0]);
+        double b = Double.parseDouble(str[1]);
+        double c = Double.parseDouble(str[2]);
+        double d = Double.parseDouble(str[3]);
+        double e = Double.parseDouble(str[4]);
+        double f = Double.parseDouble(str[5]);
+
+        int x = (int) ((c*e - b*f)/(a*e - b*d));
+        int y = (int) ((c*d - a*f)/(b*d - a*e));
 
         bw.write(x + " " + y);
         bw.flush();
