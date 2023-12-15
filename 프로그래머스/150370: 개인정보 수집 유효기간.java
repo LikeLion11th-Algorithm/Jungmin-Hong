@@ -12,24 +12,25 @@ class Solution {
         
         for (int i=0; i<privacies.length; i++) {
             String[] s = privacies[i].split(" ");
+            
             String[] date = s[0].split("\\.");
-            int year = Integer.parseInt(date[0]);
-            year += (Integer.parseInt(date[1]) + hm.get(s[1]))/12;
+            int year = Integer.parseInt(date[0]) + (Integer.parseInt(date[1]) + hm.get(s[1]))/12;
             int month = (Integer.parseInt(date[1])+hm.get(s[1]))%12;
             int day = Integer.parseInt(date[2]) - 1;
             if (day==0) {
+                day = 28;
                 month -= 1;
                 if (month==0) {
                     month = 12;
                     year -= 1;
                 }
-                day = 28;
-            }
-            
+            }            
             String[] Today = today.split("\\.");
             if (Integer.parseInt(Today[0])>year) list.add(i+1);
-            else if (Integer.parseInt(Today[1])>month) list.add(i+1);
-            else if (Integer.parseInt(Today[2])>day) list.add(i+1);
+            else if (Integer.parseInt(Today[0])==year) {
+                if (Integer.parseInt(Today[1])>month) list.add(i+1);
+                else if (Integer.parseInt(Today[1])==month && Integer.parseInt(Today[2])>day) list.add(i+1);
+            }
         }
         
         return list.stream().mapToInt(Integer::intValue).toArray();
