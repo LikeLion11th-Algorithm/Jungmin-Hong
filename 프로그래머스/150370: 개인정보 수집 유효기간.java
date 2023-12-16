@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.*;
 
 class Solution {
     public int[] solution(String today, String[] terms, String[] privacies) {
@@ -16,6 +17,10 @@ class Solution {
             String[] date = s[0].split("\\.");
             int year = Integer.parseInt(date[0]) + (Integer.parseInt(date[1]) + hm.get(s[1]))/12;
             int month = (Integer.parseInt(date[1])+hm.get(s[1]))%12;
+            if (month==0) {
+                month = 12;
+                year -= 1;
+            }
             int day = Integer.parseInt(date[2]) - 1;
             if (day==0) {
                 day = 28;
@@ -24,13 +29,12 @@ class Solution {
                     month = 12;
                     year -= 1;
                 }
-            }            
-            String[] Today = today.split("\\.");
-            if (Integer.parseInt(Today[0])>year) list.add(i+1);
-            else if (Integer.parseInt(Today[0])==year) {
-                if (Integer.parseInt(Today[1])>month) list.add(i+1);
-                else if (Integer.parseInt(Today[1])==month && Integer.parseInt(Today[2])>day) list.add(i+1);
             }
+            
+            String[] Today = today.split("\\.");
+            LocalDate ldt = LocalDate.of(Integer.parseInt(Today[0]),Integer.parseInt(Today[1]),Integer.parseInt(Today[2]));
+            LocalDate ldd = LocalDate.of(year, month, day);
+            if (ldt.isAfter(ldd)) list.add(i+1);
         }
         
         return list.stream().mapToInt(Integer::intValue).toArray();
