@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        String[] nm = br.readLine().split(" ");
+        int N = Integer.parseInt(nm[0]);
+        int M = Integer.parseInt(nm[1]);
+
+        Map<String,String> map = new HashMap<>();
+
+        for (int i=0; i<N; i++) {
+            map.put(Integer.toString(i+1), br.readLine());
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<M; i++) {
+            String s = br.readLine();
+            if (s.matches("-?\\d+(\\.\\d+)?")) {
+                sb.append(map.get(s)).append("\n");
+            }
+            else {
+                sb.append(map.entrySet().stream()
+                        .filter(entry -> Objects.equals(entry.getValue(), s))
+                        .map(Map.Entry::getKey)
+                        .collect(Collectors.joining())).append("\n");
+            }
+        }
+
+
+        bw.write(sb.toString().trim());
+        bw.flush();
+        bw.close();
+    }
+}
