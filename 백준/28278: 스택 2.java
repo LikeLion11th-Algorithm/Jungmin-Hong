@@ -14,33 +14,23 @@ public class Main {
             String s = br.readLine();
             switch (s.charAt(0)) {
                 case '1':
-                    String[] x1 = s.split(" ");
-                    stack.push(Integer.parseInt(x1[1]));
+                    stack.push(Integer.parseInt(s.substring(2)));
                     break;
                 case '2':
-                    if (!stack.empty()) {
-                        bw.write(stack.pop()+"\n");
-                    }
-                    else bw.write("-1\n");
-                    bw.flush();
+                    bw.write(stack.empty() ? "-1\n":stack.pop()+"\n");
                     break;
                 case '3':
                     bw.write(stack.size()+"\n");
-                    bw.flush();
                     break;
                 case '4':
                     bw.write(stack.empty()?"1\n":"0\n");
-                    bw.flush();
                     break;
                 case '5':
-                    if (!stack.empty()) {
-                        bw.write(stack.peek()+"\n");
-                    }
-                    else bw.write("-1\n");
-                    bw.flush();
+                    bw.write(stack.empty() ? "-1\n":stack.peek()+"\n");
                     break;
             }
         }
+        bw.flush();
         bw.close();
     }
 }
