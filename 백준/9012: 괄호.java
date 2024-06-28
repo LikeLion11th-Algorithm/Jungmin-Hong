@@ -7,26 +7,25 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        Stack<String> stack = new Stack<>();
         int N = Integer.parseInt(br.readLine());
-        boolean tf = true;
+        int answer = 0;
 
         for (int i=0; i<N;i++) {
             String[] brackets = br.readLine().split("");
+            answer = 0;
+
             for (String b:brackets) {
-                if (b.equals("(")) stack.push("(");
-                else if (stack.empty()){
-                    tf = false;
+                if (b.equals("(")) answer++;
+                else answer--;
+
+                if (answer < 0) {
+                    bw.write("NO\n");
                     break;
                 }
-                else stack.pop();
             }
-            if (tf && stack.empty()) bw.write("YES\n");
-            else {
-                bw.write("NO\n");
-                stack.clear();
-            }
-            tf = true;
+
+            if (answer == 0) bw.write("YES\n");
+            else if (answer > 0) bw.write("NO\n");
         }
 
         bw.flush();
