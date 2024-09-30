@@ -12,7 +12,6 @@ class Solution {
             int col = (int) (i%n);
             answer[idx++] = Math.max(row,col)+1;
         }       
-        
         return answer;
     }
 }
