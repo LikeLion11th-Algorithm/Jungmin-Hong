@@ -21,18 +21,17 @@ class Solution {
         int p_t = position[0]*60+position[1];
         
         for (String c : commands) {
+            // 오프닝 구간 안에 들어갈 경우, 오프닝 끝나는 위치로 이동
+            if (p_t <= ope_t && 
+                p_t >= ops_t) {
+                p_t = ope_t;
+            }
             if (c.equals("prev")) {
                 // 00:00보다 작을 경우 고려
-                // 오프닝 구간 안에 들어갈 경우, 오프닝 끝나는 위치로 이동
                 p_t = Math.max(0,p_t-10);
             }
-            else { // next일 때
+            else {
                 // 비디오 끝나는 시간보다 커질 경우 고려
-                // 오프닝 구간 안에 들어갈 경우, 오프닝 끝나는 위치로 이동
-                if (p_t <= ope_t && 
-                    p_t >= ops_t) {
-                    p_t = ope_t;
-                }
                 p_t = Math.min(v_t,p_t+10);
             }
             if (p_t <= ope_t && 
