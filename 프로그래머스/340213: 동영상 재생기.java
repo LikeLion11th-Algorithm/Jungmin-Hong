@@ -18,48 +18,29 @@ class Solution {
         int ops_t = ops[0]*60+ops[1];
         int ope_t = ope[0]*60+ope[1];
         int v_t = video[0]*60+video[1];
+        int p_t = position[0]*60+position[1];
         
         for (String c : commands) {
-            int p_t = position[0]*60+position[1];
             if (c.equals("prev")) {
                 // 00:00보다 작을 경우 고려
                 // 오프닝 구간 안에 들어갈 경우, 오프닝 끝나는 위치로 이동
-                if (p_t <= ope_t && 
-                    p_t >= ops_t) {
-                    p_t = ope_t;
-                }
-                else {
-                    p_t = p_t-10<0 ? 0:p_t-10;
-                    if (p_t <= ope_t && 
-                        p_t >= ops_t) {
-                        p_t = ope_t;
-                    }
-                }
-                position[0] = p_t/60;
-                position[1] = p_t%60;
+                p_t = Math.max(0,p_t-10);
             }
-            else {
+            else { // next일 때
                 // 비디오 끝나는 시간보다 커질 경우 고려
                 // 오프닝 구간 안에 들어갈 경우, 오프닝 끝나는 위치로 이동
-                
                 if (p_t <= ope_t && 
                     p_t >= ops_t) {
                     p_t = ope_t;
                 }
-                
-                p_t = p_t+10>v_t?v_t:p_t+10;
-                if (p_t <= ope_t && 
-                    p_t >= ops_t) {
-                    p_t = ope_t;
-                }
-                else if (p_t>v_t) {
-                    p_t=v_t;
-                }
-                position[0] = p_t/60;
-                position[1] = p_t%60;
+                p_t = Math.min(v_t,p_t+10);
+            }
+            if (p_t <= ope_t && 
+                p_t >= ops_t) {
+                p_t = ope_t;
             }
         }
-        String answer = String.format("%02d",position[0]) + ":" + String.format("%02d",position[1]);
+        String answer = String.format("%02d:%02d", p_t/60, p_t%60);
         return answer;
     }
 }
